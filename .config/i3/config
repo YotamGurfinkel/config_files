@@ -482,6 +482,7 @@ exec --no-startup-id xfce4-power-manager &
 #exec --no-startup-id xfsettingsd &
 exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd &
 bindsym $mod+space exec --no-startup-id xkb-switch -n
+#bindsym $mod+space exec --no-startup-id 'touch $HOME/dolevniv.txt'
 #exec --no-startup-id setxkbmap -option 'grp:win_space_toggle'
 
 
@@ -554,9 +555,10 @@ bindsym --release $mod+Escape exec xkill
 bindsym $mod+F1 exec --no-startup-id google-chrome-stable;focus
 #qwerty/azerty conflict with w
 bindsym $mod+w exec --no-startup-id "google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode";focus
+bindsym $mod+n exec --no-startup-id "google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode 'https://netflix.com'";focus
 bindsym $mod+shift+d exec --no-startup-id discord;focus
-bindsym $mod+e exec --no-startup-id emacs;focus
-bindsym control+$mod+e exec --no-startup-id nautilus;focus
+bindsym $mod+e exec --no-startup-id emacsclient -c -a 'emacs' --eval '(dashboard-refresh-buffer)';focus
+bindsym control+$mod+e exec --no-startup-id pcmanfm;focus
 bindsym $mod+s exec --no-startup-id spotify;focus
 bindsym $mod+shift+s exec --no-startup-id i3-msg workspace 2; exec --no-startup-id alacritty -e spt;focus
 bindsym control+mod1+f exec --no-startup-id firefox;focus
