@@ -64,6 +64,8 @@
 (require 'multiple-cursors-core)
 (global-set-key (kbd "C->") #'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") #'mc/mark-previous-like-this)
+(global-set-key (kbd "M-]") #'mc/mmlte--down)
+(global-set-key (kbd "M-[") #'mc/mmlte--up)
 
 (defun rc/duplicate-line ()
   "Duplicate current line"
@@ -85,8 +87,21 @@
 (add-hook 'objc-mode-hook 'irony-mode)
 
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+(defun insert-line-below ()
+  "Insert an empty line below the current line."
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (open-line 1)))
+(defun insert-line-above ()
+  "Insert an empty line below the current line."
+  (interactive)
+  (save-excursion
+    (end-of-line 0)
+    (open-line 1)))
 
-(global-set-key (kbd "<M-return>") 'open-line)
+(global-set-key (kbd "<M-return>") 'insert-line-below)
+(global-set-key (kbd "C-j") 'insert-line-above)
 ;; Maybe for bypassing doom emacs
 (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
 (define-key evil-insert-state-map (kbd "C--") 'text-scale-decrease)
