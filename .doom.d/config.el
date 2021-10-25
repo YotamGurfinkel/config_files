@@ -76,6 +76,13 @@
   (newline)
   (yank))
 
+(defun rc/add-semicolon ()
+  "Add Semicolon at End of Line"
+  (interactive)
+  (move-end-of-line 1)
+  (insert ";"))
+
+(global-set-key (kbd "C-M-;") 'rc/add-semicolon)
 (global-set-key (kbd "C-,") 'rc/duplicate-line)
 
 
@@ -106,6 +113,7 @@
 (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
 (define-key evil-insert-state-map (kbd "C--") 'text-scale-decrease)
 (define-key evil-insert-state-map (kbd "C-=") 'text-scale-increase)
+(define-key evil-insert-state-map (kbd "C-y") 'yank)
 
 (use-package dashboard
   :init      ;; tweak dashboard config before loading it
@@ -123,4 +131,28 @@
   :config
   (dashboard-setup-startup-hook)
   (dashboard-modify-heading-icons '((recents . "file-text")
-			      (bookmarks . "book"))))
+			            (bookmarks . "book"))))
+
+(use-package toml-mode)
+
+(use-package rust-mode
+  :hook (rust-mode . lsp))
+
+;; Add keybindings for interacting with Cargo
+(use-package cargo
+  :hook (rust-mode . cargo-minor-mode))
+
+(use-package flycheck-rust
+  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+;; (after! lsp-mode
+;;   (setq lsp-enable-symbol-highlighting nil)
+;;   (setq lsp-enable-on-type-formatting nil)
+;;   (setq lsp-signature-auto-activate nil)
+;;   (setq lsp-modeline-code-actions-enable nil)
+;;   (setq lsp-enable-folding nil)
+;;   (setq lsp-ui-sideline-show-code-actions nil)
+;;   (setq lsp-enable-snippet nil))
+
+;; (after! lsp-rust
+;;   (setq lsp-rust-server 'rust-analyzer))
