@@ -249,6 +249,7 @@ bindsym Mod1+Ctrl+Left workspace prev
 
 # switch to workspace with urgent window automatically
 #for_window [urgent=latest] focus
+for_window [class="zoom"] floating enable
 
 
 
@@ -357,7 +358,7 @@ font pango:Noto Mono Regular 13
 #assign [class="Chromium|Google-chrome"]                                             → 1
 
 # Workspace 2 text editor related
-assign [class="sublime-text|sublime_text|Sublime_text|subl|Subl|subl3|Subl3"]       → 3
+#assign [class="sublime-text|sublime_text|Sublime_text|subl|Subl|subl3|Subl3"]       → 3
 assign [class="Xed|xed|Brackets|Atom|Code|Geany"]                                   → 3
 
 # Workspace 3 Inkscape
@@ -554,8 +555,8 @@ bindsym --release $mod+Escape exec xkill
 #workspace 1 related
 bindsym $mod+F1 exec --no-startup-id google-chrome-stable;focus
 #qwerty/azerty conflict with w
-bindsym $mod+w exec --no-startup-id "google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode";focus
-bindsym $mod+n exec --no-startup-id "google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode 'https://netflix.com'";focus
+bindsym $mod+w exec --no-startup-id "brave";focus
+bindsym $mod+n exec --no-startup-id "brave 'https://netflix.com'";focus
 bindsym $mod+shift+d exec --no-startup-id discord;focus
 bindsym $mod+e exec --no-startup-id emacsclient -c -a 'emacs' --eval '(dashboard-refresh-buffer)';focus
 bindsym control+$mod+e exec --no-startup-id pcmanfm;focus
@@ -612,9 +613,8 @@ bindsym control+mod1+s exec --no-startup-id spotify;focus
 
 
 bindsym Print exec --no-startup-id scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'
-bindsym Control+Print exec --no-startup-id xfce4-screenshooter
-bindsym Control+Shift+Print exec --no-startup-id gnome-screenshot -i
-#bindsym shift+Print exec --no-startup-id shutter
+bindsym --release Control+Print exec --no-startup-id scrot -s 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'
+bindsym --release Control+Shift+Print exec --no-startup-id ~/.config/scripts/screenshot.sh
 
 
 
@@ -742,11 +742,13 @@ bindsym mod1+Shift+u exec --no-startup-id wal -i $(cat $HOME/.config/variety/wal
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/scripts/volume.py up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/scripts/volume.py down
 bindsym XF86AudioMute exec --no-startup-id ~/.config/scripts/volume.py mute
-# Make volume up in headset
+# Make volume up and down in headset
 bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id dbus-send --print-reply --system --dest=org.bluez /org/bluez/hci0/dev_94_DB_56_5B_24_45 org.bluez.MediaControl1.VolumeUp
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id dbus-send --print-reply --system --dest=org.bluez /org/bluez/hci0/dev_94_DB_56_5B_24_45 org.bluez.MediaControl1.VolumeDown
 
 #https://github.com/acrisci/playerctl/
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPause exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioStop exec --no-startup-id playerctl stop

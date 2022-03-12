@@ -8,7 +8,7 @@ echo -e "${BLUE}[-] Copying Files...${NC}"
 
 cp -r .config $HOME/
 cp -r .doom.d $HOME/
-cp -r etc/* /etc
-cp -r usr/* /usr
+sudo cp -r etc/* /etc
+sudo cp -r usr/* /usr
 
 echo -e "${GREEN}[+] Finished Copying Files!${NC}"

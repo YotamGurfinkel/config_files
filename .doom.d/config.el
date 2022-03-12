@@ -88,6 +88,8 @@
 
 (global-set-key (kbd "C-{") 'evil-shift-left-line)
 (global-set-key (kbd "C-}") 'evil-shift-right-line)
+(define-key evil-insert-state-map (kbd "C-M-{") 'evil-shift-left)
+(define-key evil-insert-state-map (kbd "C-M-}") 'evil-shift-right)
 
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -138,12 +140,15 @@
 (use-package rust-mode
   :hook (rust-mode . lsp))
 
+(use-package lsp-java :config (add-hook 'java-mode-hook 'lsp))
+
 ;; Add keybindings for interacting with Cargo
 (use-package cargo
   :hook (rust-mode . cargo-minor-mode))
 
 (use-package flycheck-rust
   :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+(menu-bar--display-line-numbers-mode-relative)
 
 ;; (after! lsp-mode
 ;;   (setq lsp-enable-symbol-highlighting nil)
