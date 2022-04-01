@@ -18,11 +18,14 @@ def notify():
     else:
         vicon = 'audio-volume-high'
     
+    mute = subprocess.getoutput("amixer -D pulse get Master | tail -1 | awk '{print $6}' | sed 's/[^a-z]*//g'")
+
     if action == "mute":
-        mute = subprocess.getoutput("amixer -D pulse get Master | tail -1 | awk '{print $6}' | sed 's/[^a-z]*//g'")
         print(mute)
         os.system("dunstify -t 1500 -r {0} -i '{1}' '{2}'".format(id, "audio-volume-muted" if mute == "off" else vicon, "Speakers muted" if mute == "off" else "Speakers unmuted"))
     else:
+        if mute == "off":
+            os.system('ponymix toggle')
         os.system("dunstify -t 1500 -r {1} -i {2} -h string:x-dunst-stack-tag:audio  'Volume' -h int:value:{0}".format(volume, id, vicon))
 
 

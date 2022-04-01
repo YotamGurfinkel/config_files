@@ -8,6 +8,7 @@ home_len=${#HOME}
 
 folders_to_copy=(
     "$HOME/.config/polybar/shapes"
+    "$HOME/.config/scripts"
     "$HOME/.config/polybar/pwidgets"
     "$HOME/.doom.d"
 )
