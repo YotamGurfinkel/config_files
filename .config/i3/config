@@ -580,7 +580,7 @@ bindsym $mod+F4 exec --no-startup-id gimp;focus
 
 #workspace 5 related
 bindsym $mod+F5 exec --no-startup-id meld;focus
-bindsym control+mod1+i exec --no-startup-id nitrogen;focus
+#bindsym control+mod1+i exec --no-startup-id nitrogen;focus
 
 #workspace 6 related
 bindsym $mod+F6 exec --no-startup-id vlc;focus
@@ -614,7 +614,7 @@ bindsym control+mod1+s exec --no-startup-id spotify;focus
 
 bindsym Print exec --no-startup-id scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'
 bindsym --release Control+Print exec --no-startup-id scrot -s 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'
-bindsym --release Control+Shift+Print exec --no-startup-id ~/.config/scripts/screenshot.sh
+bindsym --release Control+Shift+Print exec --no-startup-id ~/.config/scripts/screenshot_clip.sh
 
 
 

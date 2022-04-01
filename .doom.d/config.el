@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Yotam Gurfinkel"
+      user-mail-address "yotam706@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -28,12 +28,13 @@
 (setq doom-font (font-spec :family "Cascadia Code" :size 16))
 (setq doom-theme 'doom-one)
 ;; (add-hook 'python-mode-hook 'jedi:setup)
-(defun my/python-mode-hook ()
-  (add-to-list 'company-backends 'company-jedi)
-  (jedi:setup)
+
+(defun my/sql-mode-hook ()
+  (setq-local company-backends '(company-dabbrev-code))
   )
 
-(add-hook 'python-mode-hook 'my/python-mode-hook)
+(setq +lsp-company-backends '(:separate company-capf :with company-yasnippet company-dabbrev-code))
+(set-company-backend! 'sql-mode '(company-dabbrev-code))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -61,7 +62,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(require 'multiple-cursors-core)
 (global-set-key (kbd "C->") #'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") #'mc/mark-previous-like-this)
 (global-set-key (kbd "M-]") #'mc/mmlte--down)
@@ -91,11 +91,11 @@
 (define-key evil-insert-state-map (kbd "C-M-{") 'evil-shift-left)
 (define-key evil-insert-state-map (kbd "C-M-}") 'evil-shift-right)
 
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode)
+(add-hook! c++-mode-hook 'irony-mode)
+(add-hook! c-mode-hook 'irony-mode)
+(add-hook! objc-mode-hook 'irony-mode)
 
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+(add-hook! irony-mode-hook 'irony-cdb-autosetup-compile-options)
 (defun insert-line-below ()
   "Insert an empty line below the current line."
   (interactive)
@@ -116,8 +116,9 @@
 (define-key evil-insert-state-map (kbd "C--") 'text-scale-decrease)
 (define-key evil-insert-state-map (kbd "C-=") 'text-scale-increase)
 (define-key evil-insert-state-map (kbd "C-y") 'yank)
+(define-key evil-insert-state-map (kbd "C-j") 'insert-line-above)
 
-(use-package dashboard
+(use-package! dashboard
   :init      ;; tweak dashboard config before loading it
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
@@ -135,29 +136,25 @@
   (dashboard-modify-heading-icons '((recents . "file-text")
 			            (bookmarks . "book"))))
 
-(use-package toml-mode)
-
-(use-package rust-mode
-  :hook (rust-mode . lsp))
-
-(use-package lsp-java :config (add-hook 'java-mode-hook 'lsp))
+(use-package! lsp-java :config (add-hook 'java-mode-hook 'lsp))
 
 ;; Add keybindings for interacting with Cargo
-(use-package cargo
-  :hook (rust-mode . cargo-minor-mode))
+;(use-package cargo
+;  :hook (rust-mode . cargo-minor-mode))
 
-(use-package flycheck-rust
-  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+;;(use-package! flycheck-rust
+;;  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+;;
 (menu-bar--display-line-numbers-mode-relative)
 
-;; (after! lsp-mode
-;;   (setq lsp-enable-symbol-highlighting nil)
-;;   (setq lsp-enable-on-type-formatting nil)
-;;   (setq lsp-signature-auto-activate nil)
-;;   (setq lsp-modeline-code-actions-enable nil)
-;;   (setq lsp-enable-folding nil)
-;;   (setq lsp-ui-sideline-show-code-actions nil)
-;;   (setq lsp-enable-snippet nil))
+(after! lsp-mode
+  (setq lsp-enable-symbol-highlighting nil)
+  (setq lsp-enable-on-type-formatting nil)
+  (setq lsp-signature-auto-activate nil)
+  (setq lsp-modeline-code-actions-enable nil)
+  (setq lsp-enable-folding nil)
+  (setq lsp-ui-sideline-show-code-actions nil)
+  (setq lsp-enable-snippet nil))
 
-;; (after! lsp-rust
-;;   (setq lsp-rust-server 'rust-analyzer))
+(setq rustic-lsp-server 'rust-analyzer)
+(setq lsp-rust-server 'rust-analyzer)

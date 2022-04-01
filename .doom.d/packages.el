@@ -57,12 +57,11 @@
 			 :files ("gitignore-mode.el")))
 
 (package! irony)
-(package! company-jedi)
 (package! dashboard)
 (package! format-all)
 (package! flycheck)
 (package! flycheck-mypy)
 (package! flycheck-rust)
-(package! multiple-cursors)
 (package! toml-mode)
 (package! lsp-java)
+(package! meghanada)
