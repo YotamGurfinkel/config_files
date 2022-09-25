@@ -10,6 +10,7 @@ folders_to_copy=(
     "$HOME/.config/polybar"
     "$HOME/.config/scripts"
     "$HOME/.config/doom"
+    "$HOME/.config/fish"
 )
 
 files_to_copy=(
