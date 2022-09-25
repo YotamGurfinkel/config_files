@@ -56,12 +56,20 @@
 	  :recipe (:host github :repo "magit/git-modes"
 			 :files ("gitignore-mode.el")))
 
-(package! irony)
 (package! dashboard)
 (package! format-all)
 (package! flycheck)
 (package! flycheck-mypy)
 (package! flycheck-rust)
 (package! toml-mode)
-(package! lsp-java)
-(package! meghanada)
+;; (package! pdf-tools)
+(package! corfu
+  :recipe (:host github :repo "minad/corfu"))
+(package! corfu-doc
+  :recipe (:host github :repo "galeo/corfu-doc"))
+(package! cape)
+(package! kind-icon)
+(package! all-the-icons-dired)
+(package! company)
+(package! lsp-pyright)
+(package! docstr)
