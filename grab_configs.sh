@@ -7,10 +7,9 @@ NC='\033[0m' # No Color
 home_len=${#HOME}
 
 folders_to_copy=(
-    "$HOME/.config/polybar/shapes"
+    "$HOME/.config/polybar"
     "$HOME/.config/scripts"
-    "$HOME/.config/polybar/pwidgets"
-    "$HOME/.doom.d"
+    "$HOME/.config/doom"
 )
 
 files_to_copy=(
